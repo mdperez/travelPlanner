@@ -7,61 +7,39 @@
   <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
+    <!-- <div id="addTrip" class="popup">
+      <div class="container">
+        <h2>Add trip</h2>
+      </div>
+    </div> -->
     <div class="wrapper">
       <header>
         <h1>Travel Planner</h1>
-        <div class="button button-white"><span class="icon-plus"></span> add trip</div>
+        <div class="button button-white" id="open-addTrip"><span class="icon-plus"></span> add trip</div>
       </header>
-      <section id="trips" role="main">
-        <div class="trip">
-          <h2>Southern Europe</h2>
-          <div class="destinations">
-            <div class="destination">
-              <div class="picture">
-                <img src="https://via.placeholder.com/150" />
-              </div>
-              <div class="data">
-                <h3 class="location">Barcelona</h3>
-                <div class="dates">
-                  <span class="date">01/01/1900</span>
-                  -
-                  <span class="date">03/01/1900</span>
-                  (200 days left)
-                </div>
-              </div>
-              <div class="buttons">
-                <div class="button button-warning"><span class="icon-remove"></span> remove destination</div>
-                <div class="button button-success"><span class="icon-plus"></span> add transport</div>
-                <div class="button button-success"><span class="icon-plus"></span> add lodging</div>
-                <div class="button button-success"><span class="icon-plus"></span> add packing list</div>
-                <div class="button button-success"><span class="icon-plus"></span> add notes</div>
-              </div>
-            </div>
-            <div class="destination">
-              <div class="picture">
-                <img src="https://via.placeholder.com/150" />
-              </div>
-              <div class="data">
-                <h3 class="location">Rome</h3>
-                <div class="dates">
-                  <span class="date">01/01/1900</span>
-                  -
-                  <span class="date">03/01/1900</span>
-                  (200 days left)
-                </div>
-              </div>
-              <div class="buttons">
-                <div class="button button-warning"><span class="icon-remove"></span> remove destination</div>
-                <div class="button button-success"><span class="icon-plus"></span> add transport</div>
-                <div class="button button-success"><span class="icon-plus"></span> add lodging</div>
-                <div class="button button-success"><span class="icon-plus"></span> add packing list</div>
-                <div class="button button-success"><span class="icon-plus"></span> add notes</div>
-              </div>
-            </div>
+      <section id="addTrip-section">
+        <div class="wrapper">
+          <div class="tripData">
+            <label>Trip Name: </label>
+            <input />
+            <label>Destination: </label>
+            <input />
+          </div>
+          <div class="tripDate">
+            <label>start date: </label>
+            <input />
+            <label>end date: </label>
+            <input />
+          </div>
+          <div class="buttons">
+            <span class="button button-success icon-plus"></span>
+            <span class="button button-warning icon-remove" id="close-addTrip"></span>
           </div>
         </div>
+      </section>
+      <section id="tripList-section" role="main">
         <div class="trip">
-          <h2>Southern Europe</h2>
+          <h2><span class="icon-map-o"></span> Southern Europe</h2>
           <div class="destinations">
             <div class="destination">
               <div class="picture">
