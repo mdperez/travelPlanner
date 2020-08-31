@@ -22,14 +22,18 @@ const checkAddTripFields = () => {
 }
 
 const addTrip = () => {
+  const ts = +new Date();
   const tripName = document.querySelector("#tripName-input").value;
   const destination = document.querySelector("#destination-input").value;
   const startDate = document.querySelector("#startDate-input").value;
   const endDate = document.querySelector("#endDate-input").value;
   const tripContent = `
-    <h2><span class="icon-map-o"></span> ${tripName}</h2>
+    <div class="header">
+      <h2><span class="icon-map-o"></span> ${tripName}</h2>
+      <div class="button button-warning removeTrip"><span class="icon-remove"></span> remove trip</div>
+    </div>
     <div class="destinations">
-      <div class="destination">
+      <div class="destination" id="destination-${ts}">
         <div class="picture">
           <img src="https://via.placeholder.com/150" />
         </div>
@@ -42,7 +46,7 @@ const addTrip = () => {
           </div>
         </div>
         <div class="buttons">
-          <div class="button button-warning"><span class="icon-remove"></span> remove destination</div>
+          <div class="button button-warning removeDestination"><span class="icon-remove"></span> remove destination</div>
           <div class="button button-success"><span class="icon-plus"></span> add transport</div>
           <div class="button button-success"><span class="icon-plus"></span> add lodging</div>
           <div class="button button-success"><span class="icon-plus"></span> add packing list</div>
@@ -54,10 +58,24 @@ const addTrip = () => {
 
   const trip = document.createElement("div");
   trip.classList.add("trip");
+  trip.id = `trip-${ts}`;
   trip.innerHTML = tripContent;
 
   document.querySelector("#tripList-section").append(trip);
   // TODO: add to localStorage
+
+  trip.querySelector(".removeTrip").addEventListener("click", (e) => {
+    e.currentTarget.closest(".trip").remove();
+    //TODO: remove from localStorage
+  });
+
+  trip.querySelector(".removeDestination").addEventListener("click", (e) => {
+    e.currentTarget.closest(".destination").remove();
+    //TODO: remove from localStorage
+  });
+
+  document.querySelector("#addTrip-section").classList.remove("open");
+  clearAddTrip();
 }
 
 document.querySelector("#addTrip").addEventListener("click", (e) => {
