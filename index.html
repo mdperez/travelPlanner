@@ -18,27 +18,27 @@
         <div class="button button-white" id="open-addTrip"><span class="icon-plus"></span> add trip</div>
       </header>
       <section id="addTrip-section">
-        <div class="wrapper">
+        <form class="wrapper">
           <div class="tripData">
             <label>Trip Name: </label>
-            <input />
+            <input id="tripName-input" />
             <label>Destination: </label>
-            <input />
+            <input id="destination-input" />
           </div>
           <div class="tripDate">
             <label>start date: </label>
-            <input />
+            <input id="startDate-input" />
             <label>end date: </label>
-            <input />
+            <input  id="endDate-input" />
           </div>
           <div class="buttons">
-            <span class="button button-success icon-plus"></span>
+            <span class="button button-success icon-plus" id="addTrip"></span>
             <span class="button button-warning icon-remove" id="close-addTrip"></span>
           </div>
-        </div>
+        </form>
       </section>
       <section id="tripList-section" role="main">
-        <div class="trip">
+        <!-- <div class="trip">
           <h2><span class="icon-map-o"></span> Southern Europe</h2>
           <div class="destinations">
             <div class="destination">
@@ -84,7 +84,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </section>
     </div>
     <script src="index.js" type="text/javascript"></script>
