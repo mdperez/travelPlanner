@@ -279,3 +279,21 @@ label {
 #addTrip-section input {
   margin-right: 20px;
 }
+
+.addDestination-section {
+  background-color: #fff;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1s ease-out;
+}
+
+.addDestination-section.open {
+  max-height: 200px;
+}
+
+
+.addDestination-section .wrapper {
+  padding: 20px 2vw;
+  display: flex;
+  justify-content: space-evenly;
+}

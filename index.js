@@ -14,6 +14,7 @@ document.querySelector("#close-addTrip").addEventListener("click", (e) => {
 });
 
 const checkAddTripFields = () => {
+  // TODO: add types validation and correct dates (end > start, and start > today)
   const validateTripName = document.querySelector("#tripName-input").value !== "";
   const validateDestination = document.querySelector("#destination-input").value !== "";
   const validateStartDate = document.querySelector("#startDate-input").value !== "";
@@ -30,8 +31,29 @@ const addTrip = () => {
   const tripContent = `
     <div class="header">
       <h2><span class="icon-map-o"></span> ${tripName}</h2>
-      <div class="button button-warning removeTrip"><span class="icon-remove"></span> remove trip</div>
+      <div class="buttons">
+        <div class="button button-success open-addDestination"><span class="icon-plus"></span> add destination</div>
+        <div class="button button-warning removeTrip"><span class="icon-remove"></span> remove trip</div>
+      </div>
     </div>
+    <section class="addDestination-section">
+      <form class="wrapper">
+        <div class="destinationData">
+          <label>Destination: </label>
+          <input id="destinationName-input">
+        </div>
+        <div class="destinationDate">
+          <label>start date: </label>
+          <input id="destinationStartDate-input">
+          <label>end date: </label>
+          <input id="destinationEndDate-input">
+        </div>
+        <div class="buttons">
+          <span class="button button-success icon-plus addDestination"></span>
+          <span class="button button-warning icon-remove close-addDestination"></span>
+        </div>
+      </form>
+    </section>
     <div class="destinations">
       <div class="destination" id="destination-${ts}">
         <div class="picture">
@@ -73,6 +95,18 @@ const addTrip = () => {
     e.currentTarget.closest(".destination").remove();
     //TODO: remove from localStorage
   });
+
+  trip.querySelector(".open-addDestination").addEventListener("click", (e) => {
+    e.currentTarget.closest(".trip").querySelector(".addDestination-section").classList.add("open");
+  });
+
+  // trip.querySelector("#addDestination").addEventListener("click", (e) => {
+  //   if (checkAddDestinationFields()) {
+  //     addDestination();
+  //   } else {
+  //     alert("todo: validate fields");
+  //   }
+  // });
 
   document.querySelector("#addTrip-section").classList.remove("open");
   clearAddTrip();
