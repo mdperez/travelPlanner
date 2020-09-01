@@ -8,6 +8,12 @@ const clearAddTrip = () => {
   });
 }
 
+const clearAddDestination = (addDestinationSection) => {
+  addDestinationSection.querySelectorAll("input").forEach(elm => {
+    elm.value = "";
+  });
+}
+
 document.querySelector("#close-addTrip").addEventListener("click", (e) => {
     document.querySelector("#addTrip-section").classList.remove("open");
     clearAddTrip();
@@ -98,6 +104,13 @@ const addTrip = () => {
 
   trip.querySelector(".open-addDestination").addEventListener("click", (e) => {
     e.currentTarget.closest(".trip").querySelector(".addDestination-section").classList.add("open");
+  });
+  
+  trip.querySelector(".close-addDestination").addEventListener("click", (e) => {
+    const currentTrip = e.currentTarget.closest(".trip");
+    const addDestinationSection = currentTrip.querySelector(".addDestination-section");
+    addDestinationSection.classList.remove("open");
+    clearAddDestination(addDestinationSection);
   });
 
   // trip.querySelector("#addDestination").addEventListener("click", (e) => {
