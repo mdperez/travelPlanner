@@ -1,23 +1,25 @@
-document.querySelector("#open-addTrip").addEventListener("click", (e) => {
-    document.querySelector("#addTrip-section").classList.add("open");
-});
+const openAddTrip = () => {
+  document.querySelector("#addTrip-section").classList.add("open");
+}; 
+document.querySelector("#open-addTrip").addEventListener("click", openAddTrip);
 
 const clearAddTrip = () => {
   document.querySelectorAll("#addTrip-section input").forEach(elm => {
     elm.value = "";
   });
-}
+};
 
 const clearAddDestination = (addDestinationSection) => {
   addDestinationSection.querySelectorAll("input").forEach(elm => {
     elm.value = "";
   });
-}
+};
 
-document.querySelector("#close-addTrip").addEventListener("click", (e) => {
-    document.querySelector("#addTrip-section").classList.remove("open");
-    clearAddTrip();
-});
+const closeAddTrip = () => {
+  document.querySelector("#addTrip-section").classList.remove("open");
+  clearAddTrip();
+};
+document.querySelector("#close-addTrip").addEventListener("click", closeAddTrip);
 
 const checkAddTripFields = () => {
   // TODO: add types validation and correct dates (end > start, and start > today)
@@ -26,7 +28,7 @@ const checkAddTripFields = () => {
   const validateStartDate = document.querySelector("#startDate-input").value !== "";
   const validateEndDate = document.querySelector("#endDate-input").value !== "";
   return validateTripName && validateDestination && validateStartDate && validateEndDate;
-}
+};
 
 const checkAddDestinationFields = addDestinationSection => {
   // TODO: add types validation and correct dates (end > start, and start > today)
@@ -34,7 +36,7 @@ const checkAddDestinationFields = addDestinationSection => {
   const validateStartDate = addDestinationSection.querySelector(".destinationStartDate-input").value !== "";
   const validateEndDate = addDestinationSection.querySelector(".destinationEndDate-input").value !== "";
   return validateDestination && validateStartDate && validateEndDate;
-}
+};
 
 const addDestination = trip => {
   const ts = +new Date();
@@ -69,6 +71,43 @@ const addDestination = trip => {
   destination.innerHTML = destinationContent;
 
   trip.querySelector(".destinations").append(destination);
+
+  destination.querySelector(".removeDestination").addEventListener("click", removeDestination);
+
+  const addDestinationSection = trip.querySelector(".addDestination-section");
+  addDestinationSection.classList.remove("open");
+  clearAddDestination(addDestinationSection);
+};
+
+const removeTrip = (e) => {
+  e.currentTarget.closest(".trip").remove();
+  //TODO: remove from localStorage
+};
+
+const removeDestination = (e) => {
+  e.currentTarget.closest(".destination").remove();
+  //TODO: remove from localStorage
+};
+
+const openAddDestination = (e) => {
+  e.currentTarget.closest(".trip").querySelector(".addDestination-section").classList.add("open")
+};
+
+const closeAddDestination = (e) => {
+  const currentTrip = e.currentTarget.closest(".trip");
+  const addDestinationSection = currentTrip.querySelector(".addDestination-section");
+  addDestinationSection.classList.remove("open");
+  clearAddDestination(addDestinationSection);
+};
+
+const checkAddDestination = (e) => {
+  const currentTrip = e.currentTarget.closest(".trip");
+  const addDestinationSection = currentTrip.querySelector(".addDestination-section");
+  if (checkAddDestinationFields(addDestinationSection)) {
+    addDestination(currentTrip);
+  } else {
+    alert("todo: validate fields");
+  }
 };
 
 const addTrip = () => {
@@ -135,45 +174,22 @@ const addTrip = () => {
   document.querySelector("#tripList-section").append(trip);
   // TODO: add to localStorage
 
-  trip.querySelector(".removeTrip").addEventListener("click", (e) => {
-    e.currentTarget.closest(".trip").remove();
-    //TODO: remove from localStorage
-  });
-
-  trip.querySelector(".removeDestination").addEventListener("click", (e) => {
-    e.currentTarget.closest(".destination").remove();
-    //TODO: remove from localStorage
-  });
-
-  trip.querySelector(".open-addDestination").addEventListener("click", (e) => {
-    e.currentTarget.closest(".trip").querySelector(".addDestination-section").classList.add("open");
-  });
-  
-  trip.querySelector(".close-addDestination").addEventListener("click", (e) => {
-    const currentTrip = e.currentTarget.closest(".trip");
-    const addDestinationSection = currentTrip.querySelector(".addDestination-section");
-    addDestinationSection.classList.remove("open");
-    clearAddDestination(addDestinationSection);
-  });
-
-  trip.querySelector(".addDestination").addEventListener("click", (e) => {
-    const currentTrip = e.currentTarget.closest(".trip");
-    const addDestinationSection = currentTrip.querySelector(".addDestination-section");
-    if (checkAddDestinationFields(addDestinationSection)) {
-      addDestination(currentTrip);
-    } else {
-      alert("todo: validate fields");
-    }
-  });
+  trip.querySelector(".removeTrip").addEventListener("click", removeTrip);
+  trip.querySelector(".removeDestination").addEventListener("click", removeDestination);
+  trip.querySelector(".open-addDestination").addEventListener("click", openAddDestination);
+  trip.querySelector(".close-addDestination").addEventListener("click", closeAddDestination);
+  trip.querySelector(".addDestination").addEventListener("click", checkAddDestination);
 
   document.querySelector("#addTrip-section").classList.remove("open");
   clearAddTrip();
-}
+};
 
-document.querySelector("#addTrip").addEventListener("click", (e) => {
+const checkAddTrip = (e) => {
   if (checkAddTripFields()) {
     addTrip();
   } else {
     alert("todo: validate fields");
   }
-});
+};
+
+document.querySelector("#addTrip").addEventListener("click", checkAddTrip);
