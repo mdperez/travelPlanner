@@ -1,5 +1,11 @@
+import TinyPicker from 'tiny-picker';
+
 const openAddTrip = () => {
   document.querySelector("#addTrip-section").classList.add("open");
+  new TinyPicker({
+    firstBox: document.getElementById('startDate-input'),
+    lastBox: document.getElementById('endDate-input'),
+  }).init();
 }; 
 document.querySelector("#open-addTrip").addEventListener("click", openAddTrip);
 
@@ -7,6 +13,7 @@ const clearAddTrip = () => {
   document.querySelectorAll("#addTrip-section input").forEach(elm => {
     elm.value = "";
   });
+  // tripDate.update();
 };
 
 const clearAddDestination = (addDestinationSection) => {
@@ -90,7 +97,12 @@ const removeDestination = (e) => {
 };
 
 const openAddDestination = (e) => {
-  e.currentTarget.closest(".trip").querySelector(".addDestination-section").classList.add("open")
+  let section = e.currentTarget.closest(".trip").querySelector(".addDestination-section");
+  section.classList.add("open")
+  new TinyPicker({
+    firstBox: section.querySelector('.destinationStartDate-input'),
+    lastBox: section.querySelector('.destinationEndDate-input'),
+  }).init();
 };
 
 const closeAddDestination = (e) => {
@@ -131,9 +143,9 @@ const addTrip = () => {
           <input class="destinationName-input">
         </div>
         <div class="destinationDate">
-          <label>start date: </label>
+          <label>From: </label>
           <input class="destinationStartDate-input">
-          <label>end date: </label>
+          <label>To: </label>
           <input class="destinationEndDate-input">
         </div>
         <div class="buttons">
